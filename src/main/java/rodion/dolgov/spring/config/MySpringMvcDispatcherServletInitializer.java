@@ -1,9 +1,12 @@
 package rodion.dolgov.spring.config;
 
 import org.springframework.web.filter.CharacterEncodingFilter;
+import org.springframework.web.filter.HiddenHttpMethodFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 import javax.servlet.Filter;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
 import java.nio.charset.StandardCharsets;
 
 public class MySpringMvcDispatcherServletInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
@@ -25,5 +28,15 @@ public class MySpringMvcDispatcherServletInitializer extends AbstractAnnotationC
     @Override
     protected Filter[] getServletFilters() {
         return new Filter[]{new CharacterEncodingFilter(StandardCharsets.UTF_8.name(), true)};
+    }
+
+    @Override
+    public void onStartup(ServletContext aServletContext) throws ServletException {
+        super.onStartup(aServletContext);
+        registerHiddenFieldFilter(aServletContext);
+    }
+
+    private void registerHiddenFieldFilter(ServletContext aContext){
+            aContext.addFilter("hiddenHttpMethodFilter", new HiddenHttpMethodFilter()).addMappingForUrlPatterns(null, true, "/*");
     }
 }
