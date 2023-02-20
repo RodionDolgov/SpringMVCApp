@@ -1,12 +1,13 @@
 package rodion.dolgov.spring.controllers;
 
-import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import rodion.dolgov.spring.dao.PersonDAO;
 import rodion.dolgov.spring.models.Person;
+
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/people")
