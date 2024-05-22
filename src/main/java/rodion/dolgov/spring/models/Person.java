@@ -50,11 +50,11 @@ public class Person {
         this.id = id;
     }
 
-    public String getMan_name() {
+    public String getManName() {
         return man_name;
     }
 
-    public void setMan_name(String man_name) {
+    public void setManName(String man_name) {
         this.man_name = man_name;
     }
 }

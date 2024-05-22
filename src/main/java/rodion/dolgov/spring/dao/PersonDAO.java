@@ -6,6 +6,9 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 import rodion.dolgov.spring.models.Person;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.List;
 
 @Component
@@ -29,11 +32,11 @@ public class PersonDAO {
 
     public void save(Person person) {
         jdbcTemplate.update("INSERT INTO Person (man_name, age, email) VALUES (?,?,?)",
-                person.getMan_name(), person.getAge(), person.getEmail());
+                person.getManName(), person.getAge(), person.getEmail());
     }
 
     public void update(int id, Person updatedPerson) {
-        jdbcTemplate.update("UPDATE Person SET man_name = ?, age = ?, email = ? WHERE id = ?", updatedPerson.getMan_name(), updatedPerson.getAge(),
+        jdbcTemplate.update("UPDATE Person SET man_name = ?, age = ?, email = ? WHERE id = ?", updatedPerson.getManName(), updatedPerson.getAge(),
                 updatedPerson.getEmail(), id);
     }
 
