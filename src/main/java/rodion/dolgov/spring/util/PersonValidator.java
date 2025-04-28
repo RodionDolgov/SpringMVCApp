@@ -30,8 +30,8 @@ public class PersonValidator implements Validator {
             errors.rejectValue("email", "", "This email is already taken");
         }
 
-        if (Character.isUpperCase(person.getName().charAt(0))) {
-            errors.rejectValue("email", "", "The should start with a capital letter");
+        if (!Character.isUpperCase(person.getName().charAt(0))) {
+            errors.rejectValue("name", "", "The name should start with a capital letter");
         }
     }
 }
