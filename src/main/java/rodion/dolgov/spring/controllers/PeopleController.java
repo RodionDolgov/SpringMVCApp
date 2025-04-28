@@ -6,6 +6,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import rodion.dolgov.spring.dao.PersonDAO;
 import rodion.dolgov.spring.models.Person;
+import rodion.dolgov.spring.util.PersonValidator;
 
 import javax.validation.Valid;
 
@@ -14,9 +15,11 @@ import javax.validation.Valid;
 public class PeopleController {
 
     private final PersonDAO personDAO;
+    private final PersonValidator personValidator;
 
-    public PeopleController(PersonDAO personDAO) {
+    public PeopleController(PersonDAO personDAO, PersonValidator personValidator) {
         this.personDAO = personDAO;
+        this.personValidator = personValidator;
     }
 
     @GetMapping()
@@ -27,7 +30,7 @@ public class PeopleController {
 
     @GetMapping("/{id}")
     public String getMan(@PathVariable("id") int id, Model model){
-        model.addAttribute("person", personDAO.getMan(id));
+        model.addAttribute("person", personDAO.getManById(id));
         return "people/man";
     }
 
@@ -40,6 +43,8 @@ public class PeopleController {
 
     @PostMapping()
     public String createPerson(@ModelAttribute("person") @Valid Person person, BindingResult bindingResult) {
+        personValidator.validate(person, bindingResult);
+
         if(bindingResult.hasErrors())
             return "people/newPerson";
 
@@ -49,12 +54,14 @@ public class PeopleController {
 
     @GetMapping("/{id}/edit")
     public String edit (Model model, @PathVariable("id") int id){
-        model.addAttribute("person", personDAO.getMan(id));
+        model.addAttribute("person", personDAO.getManById(id));
         return "people/edit"; // путь к представлению
     }
 
     @PatchMapping("/{id}")
     public String update(@ModelAttribute("person") @Valid Person person, BindingResult bindingResult, @PathVariable("id") int id){
+        personValidator.validate(person, bindingResult);
+
         if(bindingResult.hasErrors())
             return "people/edit";
 
