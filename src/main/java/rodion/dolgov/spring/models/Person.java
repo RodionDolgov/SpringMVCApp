@@ -1,23 +1,33 @@
 package rodion.dolgov.spring.models;
 
+import jakarta.persistence.*;
+
 import javax.validation.constraints.*;
 
+@Entity
+@Table(name = "person")
 public class Person {
+    @Id
     private int id;
 
     @NotEmpty(message = "Name should not be empty")
     @Size(min = 2, max = 30, message = "Name should be between 2 and 30 characters")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column
     private String name;
 
     @Min(value = 1, message = "Value must be more than 0")
+    @Column
     private int age;
 
     @NotEmpty(message = "Name should not be empty")
     @Email(message = "Enter valid email")
+    @Column
     private String email;
 
     // Country, City, postal code(6 digits)
     @Pattern(regexp = "[A-Z]\\w+, [A-Z]\\w+, \\d{6}", message = "Address should be like \"Country, City, 6 digits (postal code)\"")
+    @Column
     private String address;
 
     public int getAge() {
