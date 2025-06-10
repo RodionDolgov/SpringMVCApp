@@ -3,6 +3,7 @@ package rodion.dolgov.spring.dao;
 import jakarta.transaction.Transactional;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import rodion.dolgov.spring.models.Person;
 
@@ -14,6 +15,7 @@ public class PersonDAO {
 
     private final SessionFactory sessionFactory;
 
+    @Autowired
     public PersonDAO(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }

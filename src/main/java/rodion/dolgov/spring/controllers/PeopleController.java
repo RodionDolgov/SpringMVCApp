@@ -1,5 +1,7 @@
 package rodion.dolgov.spring.controllers;
 
+import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -8,8 +10,6 @@ import rodion.dolgov.spring.dao.PersonDAO;
 import rodion.dolgov.spring.models.Person;
 import rodion.dolgov.spring.util.PersonValidator;
 
-import javax.validation.Valid;
-
 @Controller
 @RequestMapping("/people")
 public class PeopleController {
@@ -17,6 +17,7 @@ public class PeopleController {
     private final PersonDAO personDAO;
     private final PersonValidator personValidator;
 
+    @Autowired
     public PeopleController(PersonDAO personDAO, PersonValidator personValidator) {
         this.personDAO = personDAO;
         this.personValidator = personValidator;
