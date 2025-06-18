@@ -10,6 +10,7 @@ import rodion.dolgov.spring.models.Person;
 import java.util.List;
 import java.util.Optional;
 
+@Deprecated
 @Component
 public class PersonDAO {
 

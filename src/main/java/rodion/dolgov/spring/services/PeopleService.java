@@ -7,6 +7,7 @@ import rodion.dolgov.spring.models.Person;
 import rodion.dolgov.spring.repository.PeopleRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional(readOnly = true)
@@ -24,6 +25,10 @@ public class PeopleService {
 
     public Person findById(int id) {
         return peopleRepository.findById(id).orElse(null);
+    }
+
+    public Optional<Person> findByEmail(String email) {
+        return peopleRepository.findByEmail(email);
     }
 
     public List<Person> findByName(String name) {
